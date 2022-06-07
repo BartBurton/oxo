@@ -1,6 +1,29 @@
 {
-  "extends": "expo/tsconfig.base",
   "compilerOptions": {
-    "strict": true
-  }
+    "target": "es6",
+    "baseUrl": "./",
+    "allowJs": true,
+    "checkJs": false,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "downlevelIteration": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "commonjs",
+    "jsx": "react-native",
+    "declaration": true,
+    "moduleResolution": "node",
+    "paths": {
+      "*": ["./src/*"],
+      "fonts": ["./assets/fonts/*"],
+      "icons": ["./assets/icons/*"],
+    }
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": ["node_modules"],
+  "extends": "expo/tsconfig.base"
 }

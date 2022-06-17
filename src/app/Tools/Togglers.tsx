@@ -1,11 +1,12 @@
 import { EasyIcon, HardIcon, MiddleIcon, SwapToOIcon, SwapToXIcon } from 'components/OxoIcons'
-import { useLevel, useSide } from 'hooks'
+import { useGameResult, useLevel, useSide } from 'hooks'
 import React, { useRef } from 'react'
 import { useMemo } from 'react'
 import { Animated, TouchableOpacity, View } from 'react-native'
 
 
 const LevelToggler = () => {
+    const { gameResult } = useGameResult()
     const { level, toggleLevel } = useLevel()
     const icon = useMemo(() => {
         switch (level) {
@@ -36,7 +37,7 @@ const LevelToggler = () => {
 
     return (
         <Animated.View style={{ transform: [{ scaleY: interpolateY }] }}>
-            <TouchableOpacity onPress={() => { handlePress() }} activeOpacity={1}>
+            <TouchableOpacity onPress={() => { handlePress() }} activeOpacity={1} disabled={gameResult === null}>
                 {icon}
             </TouchableOpacity>
         </Animated.View >
@@ -44,6 +45,7 @@ const LevelToggler = () => {
 }
 
 const SideToggler = () => {
+    const { gameResult } = useGameResult()
     const { side, toggleSide } = useSide()
     const icon = useMemo(() => side === 'x' ? <SwapToXIcon /> : <SwapToOIcon />, [side])
 
@@ -64,7 +66,7 @@ const SideToggler = () => {
 
 
     return (
-        <TouchableOpacity onPress={() => { handlePress() }} activeOpacity={1}>
+        <TouchableOpacity onPress={() => { handlePress() }} activeOpacity={1} disabled={gameResult === null}>
             <Animated.View style={{ transform: [{ rotate: interpolateSpin }] }}>
                 {icon}
             </Animated.View>

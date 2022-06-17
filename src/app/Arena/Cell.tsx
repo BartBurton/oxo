@@ -13,7 +13,7 @@ type Props = {
 }
 
 const Cell = ({ x, y, styles, maxWidth, maxHeight }: Props) => {
-    const { cell, changeCell } = useCell(x, y)
+    const { cell, move } = useCell(x, y)
 
     const icon = useMemo(() => cell && (
         cell === 'o' ? <OIcon /> : <XIcon />
@@ -22,14 +22,14 @@ const Cell = ({ x, y, styles, maxWidth, maxHeight }: Props) => {
 
     return (
         <TouchableOpacity
-            onPress={() => { changeCell() }}
+            onPress={() => { move() }}
             style={[
                 styles, {
                     flex: 1,
                     justifyContent: 'center',
                     alignItems: 'center',
                     margin: 6,
-                    maxWidth: maxWidth,
+                    width: maxWidth,
                     maxHeight: maxHeight,
                     backgroundColor: '#626c80',
                     borderColor: '#3a404d',

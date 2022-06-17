@@ -2,19 +2,19 @@ import { useEffect, useState } from "react"
 import { useGameContext } from "./useGameContext"
 
 export default () => {
-    const context = useGameContext()
-    const [state, setState] = useState(context.side)
-    
+    const { status } = useGameContext()
+    const [state, setState] = useState(status.side)
+
     let key: number
     useEffect(() => {
-        key = context.onSideToggle.subscribe(setState)
+        key = status.onSideToggle.subscribe(setState)
         return () => {
-            context.onSideToggle.unsubscribe(key)
+            status.onSideToggle.unsubscribe(key)
         }
     })
 
     return {
         side: state,
-        toggleSide: context.toggleSide
+        toggleSide: status.toggleSide
     }
 }

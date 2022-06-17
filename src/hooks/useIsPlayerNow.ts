@@ -2,14 +2,14 @@ import { useEffect, useState } from "react"
 import { useGameContext } from "./useGameContext"
 
 export default () => {
-    const context = useGameContext()
-    const [state, setState] = useState(context.status.isPlayerNow)
+    const { status } = useGameContext()
+    const [state, setState] = useState(status.isPlayerNow)
 
     let key: number
     useEffect(() => {
-        key = context.onIsPlayerNowToggle.subscribe(setState)
+        key = status.onIsPlayerNowToggle.subscribe(setState)
         return () => {
-            context.onIsPlayerNowToggle.unsubscribe(key)
+            status.onIsPlayerNowToggle.unsubscribe(key)
         }
     })
 

@@ -1,9 +1,9 @@
 import { BotOIcon, BoXIcon, PlayerOIcon, PlayerXIcon } from 'components/OxoIcons'
 import OxoText from 'components/OxoText'
-import { useIsPlayerNow, useSide } from 'hooks'
+import { useGameResult, useIsPlayerNow, useSide } from 'hooks'
 import React, { useRef } from 'react'
 import { useMemo } from 'react'
-import { Animated, View } from 'react-native'
+import { Animated, TouchableOpacity, View } from 'react-native'
 import { oColor, xColor } from 'theme'
 import rand from 'utils/rand'
 
@@ -100,14 +100,65 @@ const StatusText = () => {
 }
 
 
+const WinnerText = () => {
+    const { gameResult, restart } = useGameResult()
+    const { side } = useSide()
+
+    const text = useMemo(
+        () => gameResult === 'player'
+            ? 'Player WIN'
+            : gameResult === 'bot'
+                ? 'Bot WIN'
+                : 'Both LOSE',
+        [gameResult]
+    )
+
+
+    const anim = useRef(new Animated.Value(0)).current
+    Animated.timing(anim, {
+        toValue: 1,
+        duration: 700,
+        useNativeDriver: true
+    }).start()
+
+
+    return (
+        <TouchableOpacity onPress={() => { restart() }} activeOpacity={1}>
+            <Animated.View style={{ opacity: anim }}>
+                <OxoText
+                    color={
+                        gameResult === 'player'
+                            ? side === 'x' ? xColor : oColor
+                            : side !== 'x' ? xColor : oColor
+                    }
+                    fontSize={48}
+                >
+                    {text}
+                </OxoText>
+            </Animated.View>
+        </TouchableOpacity>
+    )
+}
+
+
 
 const Statuses = () => {
-    return (
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+    const { gameResult } = useGameResult()
+
+    const status = useMemo(() => gameResult === null ? (
+        <>
             <StatusIcon />
             <View style={{ paddingHorizontal: 8 }}>
                 <StatusText />
             </View>
+        </>
+    ) : (
+        <WinnerText />
+    ), [gameResult])
+
+    return (
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            {status}
         </View>
     )
 }

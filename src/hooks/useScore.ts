@@ -2,14 +2,14 @@ import { useEffect, useState } from "react"
 import { useGameContext } from "./useGameContext"
 
 export default () => {
-    const context = useGameContext()
-    const [state, setState] = useState(context.score)
+    const { status } = useGameContext()
+    const [state, setState] = useState(status.score)
 
     let key: number
     useEffect(() => {
-        key = context.onScoreChange.subscribe(setState)
+        key = status.onScoreChange.subscribe(setState)
         return () => {
-            context.onScoreChange.unsubscribe(key)
+            status.onScoreChange.unsubscribe(key)
         }
     })
 

@@ -1,0 +1,1 @@
+export type GameResult = 'player' | 'bot' | 'draw'

@@ -18,8 +18,8 @@
       "supportsTablet": true
     },
     "android": {
-      "adaptiveIcon": {
-      }
+      "package": "com.maxnikitin.oxo",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/favicon.png"

@@ -1,7 +1,6 @@
-import OxoText from 'components/OxoText'
 import { useGameContext } from 'hooks'
 import React, { useState } from 'react'
-import { LayoutChangeEvent, StyleSheet, useWindowDimensions, View } from 'react-native'
+import { LayoutChangeEvent, StyleSheet, View } from 'react-native'
 import Cell from './Cell'
 
 const Arena = () => {
@@ -18,7 +17,7 @@ const Arena = () => {
                 [...Array(size.x).keys()].map(x => (
                     <View
                         key={x}
-                        style={[ styles.row, { maxHeight: `${scale}px` } ]}
+                        style={[ styles.row, { height: `${scale}px` } ]}
                     >
                         {[...Array(size.y).keys()].map(y => (
                             <Cell

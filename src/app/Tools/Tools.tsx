@@ -7,7 +7,6 @@ import Togglers from './Togglers'
 const Tools = () => {
     return (
         <View style={{ flex: 2, flexDirection: 'column' }}>
-
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', flexWrap: 'nowrap' }}>
                 <Statuses />
             </View>
